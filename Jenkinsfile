@@ -19,13 +19,13 @@ node{
     }
     
     stage('DOCKER IMAGE BUILD'){
-       sh "docker build -t abhinav01503/mywebappdemo:${buildNo} ."
+       sh "sudo docker build -t abhinav01503/mywebappdemo:${buildNo} ."
     }
    
     stage ('Docker login & Push') {
       withCredentials([file(credentialsId: '', variable: 'DOCKER_HUB_PWD')]) {
-         sh "docker login -u abhinav01503 -p ${DOCKER_HUB_PWD}"
+         sh "sudo docker login -u abhinav01503 -p ${DOCKER_HUB_PWD}"
       }
-       sh "docker push -u abhinav01503/mywebappdemo:${buildNo}"
+       sh "sudo docker push -u abhinav01503/mywebappdemo:${buildNo}"
     }
 }
