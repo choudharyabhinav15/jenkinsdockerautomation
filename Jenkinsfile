@@ -3,6 +3,8 @@ node{
    def tomcatWeb = '/opt/apache-tomcat-7.0.104/webapps'
    def tomcatBin = '/opt/apache-tomcat-7.0.104/bin'
    
+   def buildNo = BUILD_NUMBER
+   
    def tomcatStatus = ''
    stage('SCM Checkout'){
       lock('ABC_PROP') {
@@ -16,11 +18,11 @@ node{
         sh "${mvnHome}/bin/mvn install"
     }
     
-    stage('Deploy to Tomcat'){
-        sh "sudo cp target/oraclesampleapp.war \"${tomcatWeb}/oraclesampleapp.war\""
+    stage('DOCKER IMAGE BUILD'){
+       sh "docker build -t abhinav01503/mywebappdemo:${buildNo} ."
     }
-      stage ('Start Tomcat Server') {
-        sleep(time:5,unit:"SECONDS") 
-        sh "sudo ${tomcatBin}/startup.sh"
-   }
+   
+    stage ('Docker login & Push') {
+      
+    }
 }
