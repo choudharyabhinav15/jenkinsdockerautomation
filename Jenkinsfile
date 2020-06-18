@@ -23,6 +23,9 @@ node{
     }
    
     stage ('Docker login & Push') {
-      
+      withCredentials([file(credentialsId: '', variable: 'DOCKER_HUB_PWD')]) {
+         sh "docker login -u abhinav01503 -p ${DOCKER_HUB_PWD}"
+      }
+       sh "docker push -u abhinav01503/mywebappdemo:${buildNo}"
     }
 }
