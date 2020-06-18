@@ -26,6 +26,6 @@ node{
        withCredentials([string(credentialsId: 'DOCKER_HUB_PWD', variable: 'DOCKER_HUB_PWD')]) {
           sh "sudo docker login -u abhinav01503 -p ${DOCKER_HUB_PWD}"
       }
-       sh "sudo docker push -u abhinav01503/mywebappdemo:${buildNo}"
+       sh "sudo docker push abhinav01503/mywebappdemo:${buildNo}"
     }
 }
